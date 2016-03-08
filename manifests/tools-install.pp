@@ -24,7 +24,7 @@ class tools-install {
     ensure => installed,
   }
 
-  package { 'iptraf':
+  package { 'iptraf-ng':
     ensure => installed,
   }
 }
