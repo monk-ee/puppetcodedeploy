@@ -1,0 +1,33 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: /etc/puppet
+permissions:
+  - object: /etc/puppet
+    pattern: "*"
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - file
+  - object: /etc/puppet
+    pattern: "*"
+    owner: root
+    group: root
+    mode: 2755
+    type:
+      - directory
+hooks:
+  BeforeInstall:
+    - location: hooks/checkPuppet.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: hooks/runPuppet.sh
+      timeout: 300
+      runas: root
+  ValidateService:
+    - location: hooks/onValidate.sh
+      timeout: 300
+      runas: root
